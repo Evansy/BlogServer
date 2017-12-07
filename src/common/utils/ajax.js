@@ -52,9 +52,14 @@ Axios.interceptors.request.use(
         ) {
             // 设置请求头
             config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+            // console.log(config.data);
+
             // 序列化
             config.data = qs.stringify(config.data, { arrayFormat: 'indices' });
         }
+
+        console.log(config.data);
         // else
         // {
         //     config.headers['Content-Type'] = 'application/json';

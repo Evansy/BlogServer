@@ -61,8 +61,8 @@ export default {
         },
         onLogin(){
             login({
-                username: this.username,
-                password: this.password
+                username: this.formInline.username,
+                password: this.formInline.password
             }).then(res => {
                 console.log("loign", res);
             })
