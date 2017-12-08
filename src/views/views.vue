@@ -12,6 +12,10 @@
                         <Icon type="ios-keypad" :size="iconSize"></Icon>
                         <span class="layout-text">管理日志</span>
                     </MenuItem>
+                    <MenuItem name="draft">
+                        <Icon type="ios-keypad" :size="iconSize"></Icon>
+                        <span class="layout-text">草稿列表</span>
+                    </MenuItem>
                     <MenuItem name="setting">
                         <Icon type="ios-analytics" :size="iconSize"></Icon>
                         <span class="layout-text">设置</span>
@@ -74,8 +78,10 @@ export default {
         },
 
         // 选中菜单时的事件
-        onMenuSelect(item){
-            console.log(item);
+        onMenuSelect(pathname){
+            if(this.$route.path !== `/${pathname}`){
+                this.$router.push(`/${pathname}`);
+            }
         }
     }
 }

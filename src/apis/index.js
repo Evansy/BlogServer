@@ -25,4 +25,12 @@ export const login                      = options => send(options, API.login);  
 
 /* 文章相关接口 */
 export const publishArticle             = options => send(options, API.publishArticle);                      // 发布文章
-export const articleList                = options => send(options, API.articleList);                         // 文章列表
+export const articleList                = options => send(options, API.articleList, 'get');                  // 文章列表
+
+export const deleteArticle              = options => send(options, API.publishArticle + (options.aid ? `/${options.aid}` : ''), 'delete');               // 删除文章
+export const updateArticle              = options => send(options, API.publishArticle + (options.aid ? `/${options.aid}` : ''), 'patch');                // 更新文章
+
+/* 草稿相关接口 */
+export const publishDraft              = options => send(options, API.draft, 'post');                // 发布草稿
+export const draftList                 = options => send(options, API.draftList, 'get');                // 发布草稿
+export const updatehDraft              = options => send(options, API.draft + (options.aid ? `/${options.aid}` : ''), 'patch');                // 更新草稿

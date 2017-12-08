@@ -28,13 +28,14 @@
 
 <script>
 import { login } from 'apis';
+import member from 'utils/member';
 
 export default {
     name: "login",
     data () {
         return {
             formInline: {
-                username: 'Evan',
+                username: 'boss',
                 password: '123456'
             },
             ruleInline: {
@@ -52,19 +53,21 @@ export default {
         handleSubmit(name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    this.$Message.success('登录成功!');
                     this.onLogin();
                 } else {
                     this.$Message.error('表单验证失败!');
                 }
             })
         },
+
         onLogin(){
             login({
                 username: this.formInline.username,
                 password: this.formInline.password
             }).then(res => {
-                console.log("loign", res);
+                this.$Message.success('登录成功!');
+                member.setCredential(res);
+                this.$router.push('/views');
             })
         }
     }

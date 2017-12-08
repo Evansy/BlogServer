@@ -10,7 +10,7 @@
             </FormItem>
 
             <div id="editor">
-                <mavon-editor style="height: 100%" @save="onSaveArticle"></mavon-editor>
+                <mavon-editor @change="editorChange" :ishljs="true" style="height: 100%" @save="onSaveArticle"></mavon-editor>
             </div>
 
             <div class="options-button">
@@ -31,7 +31,8 @@
 
 <script>
 // Local Registration
-import { mavonEditor } from 'mavon-editor';
+import { mavonEditor, publishDraft } from 'mavon-editor';
+
 // 可以通过 mavonEditor.markdownIt 获取解析器markdown-it对象
 import 'mavon-editor/dist/css/index.css';
 
@@ -39,45 +40,57 @@ import { publishArticle } from 'apis';
 
 export default {
     name: "create-article",
+
     data () {
         return {
             article: {
                 title: null,
-                tagList: [
-                    {
-                        value: '',
-                        label: 'javascript'
-                    },
-                    {
-                        value: 'London',
-                        label: 'London'
-                    }
-                ],
-                tags: ''
+                content: '',
+                tags: 'js'
             },
             draftLoading: false,
             submitLoading: false,
         }
     },
+
     components: {
         mavonEditor
     },
+
     methods:{
+
+        // 点击保存按钮
         onSaveArticle(textVlue, htmlValue){
             console.log(textVlue, htmlValue);
         },
 
+        // 保存草稿
         saveDraft() {
             this.draftLoading = true;
 
-            setTimeout(() => {
+            publishDraft({
+                title: this.article.title,
+                content: this.article.content,
+                tags: this.article.tags
+            }).then(res => {
+                console.log(res);
+                this.$Message.success("保存草稿成功");
                 this.draftLoading = false;
-            }, 2000);
+            }).catch(err => {
+                this.$Message.error("保存草稿失败");
+                console.log(err);
+                this.draftLoading = false;
+            });
         },
 
+        // 编辑器内容发生变化时触发
+        editorChange(textVlue, htmlValue){
+            this.article.content = htmlValue;
+        },
+
+        // 发布文章
         toSubmit() {
             this.submitLoading = true;
-
 
             publishArticle({
                 title: this.article.title,
@@ -88,15 +101,16 @@ export default {
                 this.$Message.success("发布成功");
                 this.submitLoading = false;
             }).catch(err => {
-                this.$Message.success("发布失败");
+                this.$Message.error("发布失败");
                 console.log(err);
                 this.submitLoading = false;
-            })
+            });
+        },
 
-            // setTimeout(() => {
-            //     this.submitLoading = false;
-            // }, 2000);
-        }
+        // 清空页面数据
+        // refresh(){
+
+        // }
     }
 }
 </script>

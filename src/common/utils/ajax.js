@@ -59,15 +59,15 @@ Axios.interceptors.request.use(
             config.data = qs.stringify(config.data, { arrayFormat: 'indices' });
         }
 
-        console.log(config.data);
         // else
         // {
         //     config.headers['Content-Type'] = 'application/json';
         // }
 
         // 若是有做鉴权token , 就给头部带上token
-        if (localStorage.token) {
-            config.headers.Authorization = localStorage.token;
+        let getCredential = member.getCredential();
+        if (getCredential && getCredential.token) {
+            config.headers.Authorization = 'Bearer ' + getCredential.token;
         }
         return config;
     },
@@ -101,10 +101,10 @@ Axios.interceptors.response.use(
         return res.data;
     },
     error => {
+        /* eslint-disable */
         console.log('===URL: ', JSON.stringify(_priviate.requestOptions.url));
         console.log('===RESPONSE: ', JSON.stringify(error.response));
         // console.log('requestOptions', JSON.stringify(_priviate.requestOptions));
-        /* eslint-disable */
         console.error('============== ErrorCode: ', JSON.stringify(error.response && error.response.status), "==============");
         console.error('pesponseError: ', JSON.stringify(error.response && error.response.data));
         /* eslint-enable */

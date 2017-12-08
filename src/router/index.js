@@ -4,6 +4,8 @@ import HelloWorld from 'src/components/HelloWorld';
 import Login from 'src/views/login';
 import Views from 'src/views/views';
 import Create from 'src/views/create';
+import ArticleManage from 'src/views/article-manage';
+import DraftManage from 'src/views/draft-manage';
 
 Vue.use(Router);
 
@@ -26,8 +28,22 @@ export default new Router({
             children: [
                 {
                     path: '/',
+                    redirect: '/create'
+                },
+                {
+                    path: '/create',
                     name: 'Create',
                     component: Create
+                },
+                {
+                    path: '/manage',
+                    name: 'ArticleManage',
+                    component: ArticleManage
+                },
+                {
+                    path: '/draft',
+                    name: 'DraftManage',
+                    component: DraftManage
                 }
             ]
         }
