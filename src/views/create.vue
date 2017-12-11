@@ -9,6 +9,12 @@
                 <Input v-model="article.tags" style="width:260px"></Input>
             </FormItem>
 
+            <FormItem label="封面图">
+                <Upload action="//jsonplaceholder.typicode.com/posts/" :on-success="lookUploaded" :on-preview="lookUploaded">
+                    <Button type="ghost" icon="ios-cloud-upload-outline">Upload files</Button>
+                </Upload>
+            </FormItem>
+
             <div id="editor">
                 <mavon-editor @change="editorChange" :ishljs="true" style="height: 100%" @save="onSaveArticle"></mavon-editor>
             </div>
@@ -106,6 +112,11 @@ export default {
                 this.submitLoading = false;
             });
         },
+
+        // 查看已上传的图片文件。
+        lookUploaded(url){
+            console.log(url);
+        }
 
         // 清空页面数据
         // refresh(){
