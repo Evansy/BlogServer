@@ -31,6 +31,8 @@ export const deleteArticle              = options => send(options, API.publishAr
 export const updateArticle              = options => send(options, API.publishArticle + (options.aid ? `/${options.aid}` : ''), 'patch');                // 更新文章
 
 /* 草稿相关接口 */
-export const publishDraft              = options => send(options, API.draft, 'post');                // 发布草稿
-export const draftList                 = options => send(options, API.draftList, 'get');                // 发布草稿
-export const updatehDraft              = options => send(options, API.draft + (options.aid ? `/${options.aid}` : ''), 'patch');                // 更新草稿
+export const publishDraft               = options => send(options, API.draft, 'post');                // 发布草稿
+export const draftList                  = options => send(options, API.draftList, 'get');                // 发布草稿
+export const updatehDraft               = options => send(options, API.draft + (options.aid ? `/${options.aid}` : ''), 'patch');                // 更新草稿
+
+export const uploadPics                 = options => send(options, API.uploadPics);                         // 更新草稿
