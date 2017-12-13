@@ -117,6 +117,44 @@ export default {
             this.article.content = htmlValue;
         },
 
+        postArticle(apiFunction) {
+            if(!this.article.title){
+                this.$Message.error("请填写文章标题");
+                return;
+            }
+            if(!this.article.tags){
+                this.$Message.error("请填写文章标签");
+                return;
+            }
+            if(!this.article.image){
+                this.$Message.error("请上传文章封面图");
+                return;
+            }
+            if(!this.article.content){
+                this.$Message.error("请填写文章文章内容");
+                return;
+            }
+
+            this.submitLoading = true;
+
+            let configs = {
+                title: this.article.title,
+                content: this.article.content,
+                image: this.article.image,
+                tags: this.article.tags
+            }
+
+            apiFunction(configs).then(res => {
+                console.log(res);
+                this.$Message.success("发布成功");
+                this.submitLoading = false;
+            }).catch(err => {
+                this.$Message.error("发布失败");
+                console.log(err);
+                this.submitLoading = false;
+            });
+        },
+
         // 发布文章
         toSubmit() {
 
