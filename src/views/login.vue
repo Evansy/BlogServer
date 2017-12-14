@@ -9,12 +9,12 @@
             </h3>
             <i-form ref="formInline" :model="formInline" :rules="ruleInline">
                 <Form-item prop="user">
-                    <i-input size="large" type="text" :value.sync="formInline.username" placeholder="Username">
+                    <i-input size="large" type="text" v-model="formInline.username" placeholder="Username">
                         <Icon size="22" type="ios-person-outline" slot="prepend"></Icon>
                     </i-input>
                 </Form-item>
                 <Form-item prop="password">
-                    <i-input size="large" type="password" :value.sync="formInline.password" placeholder="Password">
+                    <i-input size="large" type="password" v-model="formInline.password" placeholder="Password">
                         <Icon size="22" type="ios-locked-outline" slot="prepend"></Icon>
                     </i-input>
                 </Form-item>
@@ -35,8 +35,8 @@ export default {
     data () {
         return {
             formInline: {
-                username: 'boss',
-                password: '123456'
+                username: 'yingzi',
+                password: 'jmpwfYZ'
             },
             ruleInline: {
                 user: [
