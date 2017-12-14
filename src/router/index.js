@@ -13,7 +13,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/views'
+            redirect: '/login'
         },
         {
             path: '/login',
