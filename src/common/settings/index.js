@@ -3,4 +3,4 @@
  */
 let debug = process.env.NODE_ENV === 'development';
 // url base
-export const apiUrl = 'http://localhost:8888';
+export const apiUrl = debug ? 'http://localhost:8888' : 'http://api.iskcy.com';
