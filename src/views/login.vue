@@ -35,8 +35,8 @@ export default {
     data () {
         return {
             formInline: {
-                username: 'yingzi',
-                password: 'jmpwfYZ'
+                username: '',
+                password: ''
             },
             ruleInline: {
                 user: [

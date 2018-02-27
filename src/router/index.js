@@ -7,9 +7,11 @@ import Create from 'src/views/create';
 import ArticleManage from 'src/views/article-manage';
 import DraftManage from 'src/views/draft-manage';
 
+import member       from 'utils/member';
+
 Vue.use(Router);
 
-export default new Router({
+let route = new Router({
     routes: [
         {
             path: '/',
@@ -49,3 +51,16 @@ export default new Router({
         }
     ]
 });
+
+
+route.beforeEach((to, from, next) => {
+    let getCredential = member.getCredential();
+
+    if(getCredential || to.path === '/login' || to.params === '/'){
+        next();
+    } else {
+        next({ path: '/login' });
+    }
+});
+
+export default route;
