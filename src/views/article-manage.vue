@@ -63,7 +63,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.deleteArticle(params.row, index)
+                                        this.deleteArticle(params.row, params.index)
                                     }
                                 }
                             }, 'Delete')
